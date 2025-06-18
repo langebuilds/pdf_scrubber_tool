@@ -12,12 +12,12 @@ except ImportError:
 
 # Define redaction terms (expand as needed)
 REDACTION_PATTERNS = [
-    r"McIntosh(?: Laboratories| Laboratory)?(?: Inc\\.?| LLC)?",
-    r"Atom Power,? Inc\\.?",
-    r"\\d{1,5}\\s+\\w+\\s+(Street|St|Ave|Avenue|Blvd|Boulevard|Road|Rd|Drive|Dr)\\b",
-    r"CHARLOTTE,? NC \\d{5}",
-    r"\\(\\d{3}\\) \\d{3}-\\d{4}",
-    r"\\b[A-Z]{2,10}\\s+LABS?\\b",
+    r"McIntosh(?: Laboratories| Laboratory)?(?: Inc\.?| LLC)?",
+    r"Atom Power,? Inc\.?",
+    r"\d{1,5}\s+\w+\s+(Street|St|Ave|Avenue|Blvd|Boulevard|Road|Rd|Drive|Dr)\b",
+    r"CHARLOTTE,? NC \d{5}",
+    r"\(\d{3}\) \d{3}-\d{4}",
+    r"\b[A-Z]{2,10}\s+LABS?\b",
 ]
 
 st.title("PDF Drawing Scrubber Tool")
