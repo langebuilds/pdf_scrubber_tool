@@ -3,7 +3,33 @@ Main PDF Redaction Engine
 """
 
 import os
-import fitz  # PyMuPDF
+import sys
+
+# Try multiple ways to import PyMuPDF
+try:
+    import fitz  # PyMuPDF
+    print("✅ PyMuPDF imported successfully as 'fitz'")
+    FITZ_AVAILABLE = True
+except ImportError:
+    try:
+        import PyMuPDF as fitz
+        print("✅ PyMuPDF imported successfully as 'PyMuPDF'")
+        FITZ_AVAILABLE = True
+    except ImportError:
+        try:
+            from PyMuPDF import fitz
+            print("✅ PyMuPDF imported successfully from 'PyMuPDF'")
+            FITZ_AVAILABLE = True
+        except ImportError:
+            print("⚠️ PyMuPDF not available, using pdfplumber as fallback")
+            FITZ_AVAILABLE = False
+            try:
+                import pdfplumber
+                print("✅ pdfplumber imported successfully as fallback")
+            except ImportError:
+                print("❌ Neither PyMuPDF nor pdfplumber available")
+                sys.exit(1)
+
 import numpy as np
 import cv2
 from typing import List, Dict, Any
@@ -72,6 +98,9 @@ def redact_pdf(
     valid, msg = validate_pdf_file(pdf_path)
     if not valid:
         return {"error": msg}
+
+    if not FITZ_AVAILABLE:
+        return {"error": "PyMuPDF is required for PDF processing. Please install with: pip install PyMuPDF"}
 
     doc = fitz.open(pdf_path)
     

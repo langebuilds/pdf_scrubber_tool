@@ -1,6 +1,6 @@
 # Streamlit Cloud optimized requirements
 streamlit>=1.28.0
-PyMuPDF==1.21.1
+PyMuPDF==1.23.8
 opencv-python-headless>=4.8.0
 pytesseract>=0.3.10
 Pillow>=10.0.0
